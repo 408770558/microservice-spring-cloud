@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: microservice-hystrix-dashboard
+server:
+  port: 8032
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://${eureka-user.name}:${eureka-user.password}@${eureka-user.hostname}:${eureka-user.port}/eureka
+  instance:
+    #ip\u663E\u793A
+    prefer-ip-address: true
+    #\u81EA\u5B9A\u4E49\u663E\u793A
+    instance-id: ${spring.application.name}:${server.port}
+
+#feign:
+#  httpclient:
+#    enabled: true
+
+eureka-user:
+  hostname: localhost
+  port: 8761
+  name: admin
+  password: admin123
