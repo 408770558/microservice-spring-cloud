@@ -5,8 +5,8 @@ spring:
     name: microservice-hystrix-turbine
 
 turbine:
-  instanceUrlSuffix:
-    MICROSERVICE-CONSUMER-MOVIE-RIBBON-WITH-HYSTRIX: ribbon/actuator/hystrix.stream
+  #instanceUrlSuffix:
+    #MICROSERVICE-CONSUMER-MOVIE-RIBBON-WITH-HYSTRIX: ribbon/actuator/hystrix.stream
   aggregator:
     clusterConfig: MICROSERVICE-CONSUMER-MOVIE-RIBBON-WITH-HYSTRIX
   appConfig: microservice-consumer-movie-ribbon-with-hystrix
