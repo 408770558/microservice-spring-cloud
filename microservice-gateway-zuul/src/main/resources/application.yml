@@ -16,8 +16,24 @@ zuul:
     #\u66F4\u7EC6\u7C92\u5EA6\u914D\u7F6E\uFF0C\u670D\u52A1\u540D\u79F0\u52A0\u8DEF\u5F84  users\u53EF\u4EE5\u968F\u4FBF\u53D6\u540D,\u552F\u4E00\u5373\u53EF
     abc:
       #\u5C06microservice-provider-user\u53CD\u5411\u4EE3\u7406\u5230/user-path/**
+      #path: /user-path/**
+      #serviceId: microservice-provider-user
+      #path: /user-url/**
+      #\u8FD9\u4E9B\u7B80\u5355\u7684URL\u8DEF\u7531\u4E0D\u4F1A\u88AB\u6267\u884C\u4E3AHystrixCommand\uFF0C\u4E5F\u4E0D\u80FD\u4F7F\u7528Ribbon\u5BF9\u591A\u4E2AURL\u8FDB\u884C\u8D1F\u8F7D\u5E73\u8861
+      #url: http://localhost:8080/
       path: /user-path/**
       serviceId: microservice-provider-user
+
+ribbon:
+  eureka:
+    enabled: false
+
+#\u6307\u5B9Aservice-route\u5E76\u4E3AserviceId\u914D\u7F6ERibbon\u5BA2\u6237\u7AEF\uFF0C \u4F5C\u7528\u4E3A\u5355\u7684URL\u8DEF\u7531\u63D0\u4F9B\u8D1F\u8F7D
+#serviceId
+microservice-provider-user:
+  ribbon:
+    #\u591A\u8282\u70B9\u9017\u53F7\u5206\u9694
+    listOfServers: http://localhost:8080/
 
 eureka:
   instance:
