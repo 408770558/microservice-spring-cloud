@@ -1,0 +1,28 @@
+server:
+  port: 8040
+
+spring:
+  application:
+    name: microservice-gateway-zuul
+
+zuul:
+  # \u7981\u7528\u9664\u914D\u7F6E\u7684\u4EE3\u7406\u8DEF\u5F84\u4E4B\u5916\u7684\u6240\u6709\u53CD\u5411\u4EE3\u7406
+  ignoredServices: '*'
+  #\u5355\u4E2A\u7981\u7528\u591A\u4E2A\uFF0C\u53F7\u5206\u9694
+  #ignoredServices\uFF1A microservice-consumer-movie-ribbon-with-hystrix
+  routes:
+    microservice-provider-user: /user/**
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      #\u5F00\u542F\u8D26\u53F7\u5BC6\u7801\u8BA4\u8BC1\u9700\u8981spring-boot-starter-security\u652F\u6301, \u542F\u52A8\u7C7B\u91CC\u5173\u95EDCSRF
+      defaultZone: http://${eureka-user.name}:${eureka-user.password}@${eureka-user.hostname}:${eureka-user.port}/eureka
+
+eureka-user:
+  hostname: localhost
+  port: 8761
+  name: admin
+  password: admin123
