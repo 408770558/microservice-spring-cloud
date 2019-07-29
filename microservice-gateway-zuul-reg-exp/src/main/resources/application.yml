@@ -1,0 +1,20 @@
+server:
+  port: 8041
+
+spring:
+  application:
+    name: microservice-gateway-zuul-reg-exp
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      #\u5F00\u542F\u8D26\u53F7\u5BC6\u7801\u8BA4\u8BC1\u9700\u8981spring-boot-starter-security\u652F\u6301, \u542F\u52A8\u7C7B\u91CC\u5173\u95EDCSRF
+      defaultZone: http://${eureka-user.name}:${eureka-user.password}@${eureka-user.hostname}:${eureka-user.port}/eureka
+
+eureka-user:
+  hostname: localhost
+  port: 8761
+  name: admin
+  password: admin123

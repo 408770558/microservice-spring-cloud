@@ -22,6 +22,7 @@
         <module>microservice-hystrix-turbine</module>
         <module>microservice-hystrix-dashboard</module>
         <module>microservice-gateway-zuul</module>
+        <module>microservice-gateway-zuul-reg-exp</module>
         <module>microservice-provider-user</module>
     </modules>
 
