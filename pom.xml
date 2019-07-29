@@ -23,6 +23,7 @@
         <module>microservice-hystrix-dashboard</module>
         <module>microservice-gateway-zuul</module>
         <module>microservice-gateway-zuul-reg-exp</module>
+        <module>microservice-gateway-zuul-fallback</module>
         <module>microservice-provider-user</module>
         <module>microservice-file-upload</module>
     </modules>
@@ -63,10 +64,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
         </dependency>
 
         <dependency>
