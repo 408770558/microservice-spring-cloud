@@ -11,7 +11,13 @@ zuul:
   #\u5355\u4E2A\u7981\u7528\u591A\u4E2A\uFF0C\u53F7\u5206\u9694
   #ignoredServices\uFF1A microservice-consumer-movie-ribbon-with-hystrix
   routes:
-    microservice-provider-user: /user/**
+    #\u201C/ myusers / *\u201D\u53EA\u5339\u914D\u4E00\u4E2A\u7EA7\u522B\uFF0C\u4F46\u201C/ myusers / **\u201D\u5206\u5C42\u5339\u914D
+    #microservice-provider-user: /user/**
+    #\u66F4\u7EC6\u7C92\u5EA6\u914D\u7F6E\uFF0C\u670D\u52A1\u540D\u79F0\u52A0\u8DEF\u5F84  users\u53EF\u4EE5\u968F\u4FBF\u53D6\u540D,\u552F\u4E00\u5373\u53EF
+    abc:
+      #\u5C06microservice-provider-user\u53CD\u5411\u4EE3\u7406\u5230/user-path/**
+      path: /user-path/**
+      serviceId: microservice-provider-user
 
 eureka:
   instance:
