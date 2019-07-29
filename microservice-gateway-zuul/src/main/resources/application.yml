@@ -6,8 +6,15 @@ spring:
     name: microservice-gateway-zuul
 
 zuul:
+  #prefix: /api
+  #\u8981\u4E3A\u6240\u6709\u6620\u5C04\u6DFB\u52A0\u524D\u7F00\uFF0C\u8BF7\u5C06zuul.prefix\u8BBE\u7F6E\u4E3A\u4E00\u4E2A\u503C,  /\u5C11\u4E86\u8DEF\u5F84\u51FA\u9519
+  #prefix: /user
+  #\u5220\u9664\u4EE3\u7406\u524D\u7F00    http://localhost:8040/api/user-path/user/simple/1 \u53D8\u4E3A http://localhost:8040/user/user-path/simple/1
+  #stripPrefix: false
   # \u7981\u7528\u9664\u914D\u7F6E\u7684\u4EE3\u7406\u8DEF\u5F84\u4E4B\u5916\u7684\u6240\u6709\u53CD\u5411\u4EE3\u7406
   ignoredServices: '*'
+  #\u5FFD\u7565\u5E26admin\u7684\u8BF7\u6C42
+  ignoredPatterns: /**/admin/**
   #\u5355\u4E2A\u7981\u7528\u591A\u4E2A\uFF0C\u53F7\u5206\u9694
   #ignoredServices\uFF1A microservice-consumer-movie-ribbon-with-hystrix
   routes:
@@ -23,6 +30,12 @@ zuul:
       #url: http://localhost:8080/
       path: /user-path/**
       serviceId: microservice-provider-user
+      #sensitiveHeaders\u662F\u4E00\u4E2A\u9ED1\u540D\u5355\uFF0C\u9ED8\u8BA4\u503C\u4E0D\u4E3A\u7A7A\uFF0C\u6240\u4EE5\u8981\u4F7FZuul\u53D1\u9001\u6240\u6709\u6807\u9898\uFF08\u201C\u88AB\u5FFD\u7565\u201D\u9664\u5916\uFF09\uFF0C\u60A8\u5FC5\u987B\u5C06\u5176\u663E\u5F0F\u8BBE\u7F6E\u4E3A\u7A7A\u5217\u8868\u3002\u5982\u679C\u60A8\u8981\u5C06Cookie\u6216\u6388\u6743\u6807\u5934\u4F20\u9012\u5230\u540E\u7AEF\uFF0C\u8FD9\u662F\u5FC5\u8981\u7684   sensitiveHeaders:  \u4E0D\u8BBE\u503C
+      #\u81EA\u9009\u62E6\u622ACookie,Set-Cookie,Authorization
+      #sensitiveHeaders: Cookie,Set-Cookie,Authorization
+    #\u4E00\u822C\u4E0A\u5728\u4E00\u4E9B\u5386\u53F2\u7CFB\u7EDF\u4E0A\uFF0C\u6211\u4EEC\u4F1A\u5728\u6700\u540E\u540E\u9762\u52A0\u4E0A\u4E00\u4E2A\u8DEF\u5F84/**\u7684\u5339\u914D\u89C4\u5219\uFF0C\u4EE5\u4FDD\u8BC1\u5386\u53F2api\u53EF\u4EE5\u4F7F\u7528\uFF0C\u505A\u5230\u6700\u5927\u517C\u5BB9\u6027,\u907F\u514D\u7C7B\u4F3C404\u7684\u5F02\u5E38\u3002
+    #legacy:
+      #path: /**
 
 ribbon:
   eureka:
@@ -48,3 +61,9 @@ eureka-user:
   port: 8761
   name: admin
   password: admin123
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: routes,filters
