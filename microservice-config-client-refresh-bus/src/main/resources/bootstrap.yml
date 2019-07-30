@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: microservice-config-client-refresh-bus
+  cloud:
+    config:
+      #打开config的eureka服务发现
+      discovery:
+        enabled: true
+        service-id: microservice-config-server-authc
+      #uri: http://${eureka-user.name}:${eureka-user.password}@localhost:8060/
+      #uri: http://localhost:8060/
+      #config server设置认证后， 可在链接中添加账号密码或者添加账号密码属性， 账号密码属性比链接的方式优先级要高
+      username: ${eureka-user.name}
+      password: ${eureka-user.password}
+      profile: sit
+      label: master
+      # 指定github上配置文件的名称
+      name: microservice
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+
+eureka:
+  client:
+    #默认情况下注册到eureka server的服务是通过心跳来告知自己是UP还是DOWN，并不是通过spring-boot-actuator模块的/health端点来实现的
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://${eureka-user.name}:${eureka-user.password}@${eureka-user.hostname}:${eureka-user.port}/eureka
+  instance:
+    #ip显示
+    prefer-ip-address: true
+    #自定义显示
+    instance-id: ${spring.application.name}:${server.port}
+
+eureka-user:
+  hostname: localhost
+  port: 8761
+  name: admin
+  password: admin123
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
