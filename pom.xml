@@ -27,6 +27,7 @@
         <module>microservice-gateway-zuul-filter</module>
         <module>microservice-provider-user</module>
         <module>microservice-file-upload</module>
+        <module>microservice-config-server</module>
     </modules>
 
     <!-- spring boot配置 -->
