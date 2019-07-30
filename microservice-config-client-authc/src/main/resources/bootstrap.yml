@@ -3,8 +3,12 @@ spring:
     name: microservice-config-client-authc
   cloud:
     config:
+      #打开config的eureka服务发现
+      discovery:
+        enabled: true
+        service-id: microservice-config-server-authc
       #uri: http://${eureka-user.name}:${eureka-user.password}@localhost:8060/
-      uri: http://localhost:8060/
+      #uri: http://localhost:8060/
       #config server设置认证后， 可在链接中添加账号密码或者添加账号密码属性， 账号密码属性比链接的方式优先级要高
       username: ${eureka-user.name}
       password: ${eureka-user.password}
