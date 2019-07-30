@@ -1,0 +1,46 @@
+#The encryption algorithm is not strong enoug  原因：因为我们没有在bootstrap.properties配置文件中配置密钥
+#下载jdk8版jce 解压替换java/jre/lib/security下文件
+#localhost:8060/encrypt   post请求   body添加加密key
+#解密decrypt
+#yml加引号'{cipher}FKSAJDFGYOS8F7GLHAKERGFHLSAJ'   properties不加引号{cipher}FKSAJDFGYOS8F7GLHAKERGFHLSAJ
+encrypt:
+  key: foo
+
+#http://localhost:8060/zuul-dev.yml
+spring:
+  application:
+    name: microservice-config-server
+  profiles:
+    active: dev
+  cloud:
+    config:
+      label: master
+      server:
+        git:
+          uri: https://github.com/408770558/spring-cloud-config
+          username: 408770558
+          password: '{cipher}bc08e0764b08c2f93fb8ecbc10d66d9a043c97a04a7fbc1fc2dcabdcd59dd514'
+          searchPaths: testConfig,zuulConfig,microserviceConfig
+          default-label: master
+          basedir: config-repo/config-repo
+          force-pull: true
+  security:
+    user:
+      name: admin
+      password: admin123
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://${eureka-user.name}:${eureka-user.password}@${eureka-user.hostname}:${eureka-user.port}/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+eureka-user:
+  hostname: localhost
+  port: 8761
+  name: admin
+  password: admin123

@@ -1,9 +1,13 @@
 spring:
   application:
-    name: microservice-config-client
+    name: microservice-config-client-authc
   cloud:
     config:
+      #uri: http://${eureka-user.name}:${eureka-user.password}@localhost:8060/
       uri: http://localhost:8060/
+      #config server设置认证后， 可在链接中添加账号密码或者添加账号密码属性， 账号密码属性比链接的方式优先级要高
+      username: ${eureka-user.name}
+      password: ${eureka-user.password}
       profile: sit
       label: master
       # 指定github上配置文件的名称
