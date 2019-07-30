@@ -9,7 +9,7 @@ encrypt:
 #http://localhost:8060/zuul-dev.yml
 spring:
   application:
-    name: microservice-config-server
+    name: microservice-config-server-authc
   profiles:
     active: dev
   cloud:
