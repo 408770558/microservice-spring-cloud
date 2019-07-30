@@ -1,0 +1,37 @@
+server:
+  port: 8060
+
+#http://localhost:8060/zuul-dev.yml
+spring:
+  application:
+    name: microservice-config-server
+  profiles:
+    active: dev
+  cloud:
+    config:
+      label: master
+      server:
+        git:
+          uri: https://github.com/408770558/spring-cloud-config
+          username: 408770558
+          password: '{cipher}xxxxx'
+          searchPaths: testConfig,zuulConfig,microserviceConfig
+          default-label: master
+          basedir: config-repo/config-repo
+          force-pull: true
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://${eureka-user.name}:${eureka-user.password}@${eureka-user.hostname}:${eureka-user.port}/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+eureka-user:
+  hostname: localhost
+  port: 8761
+  name: admin
+  password: admin123

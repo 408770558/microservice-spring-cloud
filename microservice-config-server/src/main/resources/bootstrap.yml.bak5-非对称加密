@@ -1,11 +1,4 @@
-#The encryption algorithm is not strong enoug  原因：因为我们没有在bootstrap.properties配置文件中配置密钥
-#localhost:8060/encrypt   post请求   body添加加密key
-#解密decrypt
-#yml加引号'{cipher}FKSAJDFGYOS8F7GLHAKERGFHLSAJ'   properties不加引号{cipher}FKSAJDFGYOS8F7GLHAKERGFHLSAJ
-encrypt:
-  key: foo
-
-#win10非对称加密生成秘钥
+#RAS   win10非对称加密生成秘钥
 #keytool提示不是命令，切换到jdk/bin目录下运行
 #\为linux换行符  winwods无法识别 删掉放成一行即可，
 #keytool -genkeypair -help 可以查看参数意义
@@ -13,5 +6,13 @@ encrypt:
 #keytool -genkeypair -alias mytestkey -keyalg RSA \
   #  -dname "CN=Web Server,OU=Unit,O=Organization,L=City,S=State,C=US" \
   #  -keypass changeme -keystore server.jks -storepass letmein
-
+encrypt:
+  keyStore:
+    location: classpath:/server.jks
+    # 秘钥的password
+    password: letmein
+    #别名
+    alias: mytestkey
+    #私钥的密码
+    secret: changeme
 
