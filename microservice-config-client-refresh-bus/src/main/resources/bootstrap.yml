@@ -16,7 +16,6 @@ spring:
       label: master
       # 指定github上配置文件的名称
       name: microservice
-
     bus:
       trace:
         #跟踪总线，查看刷新
@@ -26,8 +25,6 @@ spring:
     port: 5672
     username: guest
     password: guest
-
-
 
 eureka:
   client:

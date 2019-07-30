@@ -24,10 +24,19 @@ spring:
           default-label: master
           basedir: config-repo/config-repo
           force-pull: true
+    bus:
+      trace:
+        #跟踪总线，查看刷新
+        enabled: true
   security:
     user:
       name: admin
       password: admin123
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 eureka:
   client:
@@ -44,3 +53,9 @@ eureka-user:
   port: 8761
   name: admin
   password: admin123
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
