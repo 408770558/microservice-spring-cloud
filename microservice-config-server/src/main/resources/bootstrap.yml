@@ -1,0 +1,6 @@
+#The encryption algorithm is not strong enoug  原因：因为我们没有在bootstrap.properties配置文件中配置密钥
+#localhost:8060/encrypt   post请求   body添加加密key
+#解密decrypt
+#yml加引号'{cipher}FKSAJDFGYOS8F7GLHAKERGFHLSAJ'   properties不加引号{cipher}FKSAJDFGYOS8F7GLHAKERGFHLSAJ
+encrypt:
+  key: foo

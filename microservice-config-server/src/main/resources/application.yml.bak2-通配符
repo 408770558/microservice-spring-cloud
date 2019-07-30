@@ -3,31 +3,25 @@ server:
 
 #http://localhost:8060/zuul-dev.yml
 spring:
-  application:
-    name: microservice-config-server
-  profiles:
-    active: dev
   cloud:
     config:
       label: master
       server:
         git:
-          uri: https://github.com/408770558/spring-cloud-config
-          username: 408770558
-          password: '{cipher}bc08e0764b08c2f93fb8ecbc10d66d9a043c97a04a7fbc1fc2dcabdcd59dd514'
-          searchPaths: testConfig,zuulConfig,microserviceConfig
-          default-label: master
-          basedir: config-repo/config-repo
-          force-pull: true
+          uri: https://github.com/408770558/{application}
+          #searchPaths: testConfig,zuulConfig,microserviceConfig
 
 eureka:
   client:
+    #默认情况下注册到eureka server的服务是通过心跳来告知自己是UP还是DOWN，并不是通过spring-boot-actuator模块的/health端点来实现的
     healthcheck:
       enabled: true
     service-url:
       defaultZone: http://${eureka-user.name}:${eureka-user.password}@${eureka-user.hostname}:${eureka-user.port}/eureka
   instance:
+    #ip显示
     prefer-ip-address: true
+    #自定义显示
     instance-id: ${spring.application.name}:${server.port}
 
 eureka-user:

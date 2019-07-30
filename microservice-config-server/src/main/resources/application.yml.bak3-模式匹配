@@ -1,0 +1,37 @@
+server:
+  port: 8060
+
+#http://localhost:8060/zuul-dev.yml
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/408770558/spring-cloud-config-special  #公用，下面匹配不到 使用公用
+          repos:
+            simple: https://github.com/simple/config-repo
+            special:
+              pattern: special*/dev*,*special*/dev*
+              uri: https://github.com/special/config-repo
+            local:
+              pattern: local*
+              uri: file:/home/configsvc/config-repo
+
+eureka:
+  client:
+    #默认情况下注册到eureka server的服务是通过心跳来告知自己是UP还是DOWN，并不是通过spring-boot-actuator模块的/health端点来实现的
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://${eureka-user.name}:${eureka-user.password}@${eureka-user.hostname}:${eureka-user.port}/eureka
+  instance:
+    #ip显示
+    prefer-ip-address: true
+    #自定义显示
+    instance-id: ${spring.application.name}:${server.port}
+
+eureka-user:
+  hostname: localhost
+  port: 8761
+  name: admin
+  password: admin123
