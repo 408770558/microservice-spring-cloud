@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: microservice-consumer-movie-feign-sleuth
+server:
+  port: 8082
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://${eureka-user.name}:${eureka-user.password}@${eureka-user.hostname}:${eureka-user.port}/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+logging:
+  level:
+    root: info
+    org.springframework.web.servlet.DispatcharServlet: debug
+    project:
+      user:
+        UserClient: DEBUG
+
+eureka-user:
+  hostname: localhost
+  port: 8761
+  name: admin
+  password: admin123
